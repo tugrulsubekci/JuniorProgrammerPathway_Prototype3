@@ -11,26 +11,37 @@ public class SpawnManager : MonoBehaviour
 
     private float startDelay = 2.0f;
     private float repeatRate = 2.0f;
+
+    private PlayerController playerControllerScript;
     // Start is called before the first frame update
     void Start()
     {
         InvokeRepeating("SpawnObstacle", startDelay, repeatRate);
-        InvokeRepeating("SpawnBackground", 0.0f, 11.2f);
+        InvokeRepeating("SpawnBackground", 0.0f, 5.6f);
+        playerControllerScript = GameObject.Find("Player").GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     void SpawnObstacle()
     {
-        Instantiate(myPrefabs[0], spawnPosition0, myPrefabs[0].transform.rotation);
+        if (!playerControllerScript.gameOver)
+        {
+            Instantiate(myPrefabs[0], spawnPosition0, myPrefabs[0].transform.rotation);
+        }
+
     }
 
     void SpawnBackground()
     {
-        Instantiate(myPrefabs[1], spawnPosition1, myPrefabs[1].transform.rotation);
+        if (!playerControllerScript.gameOver)
+        {
+            Instantiate(myPrefabs[1], spawnPosition1, myPrefabs[1].transform.rotation);
+        }
+
     }
 }

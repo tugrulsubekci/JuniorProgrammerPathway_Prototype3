@@ -4,16 +4,21 @@ using UnityEngine;
 
 public class MoveLeft : MonoBehaviour
 {
-    private int speed = 10;
+    public int speed = 10;
+    private PlayerController playerControllerScript;
     // Start is called before the first frame update
     void Start()
     {
-        
+        playerControllerScript = GameObject.Find("Player").GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(Vector3.left * speed * Time.deltaTime);
+        if(!playerControllerScript.gameOver)
+        {
+            transform.Translate(Vector3.left * speed * Time.deltaTime);
+        }
+        
     }
 }
