@@ -16,8 +16,14 @@ public class PlayerController : MonoBehaviour
 
     public int jumpPower = 10;
     public float gravityModifier;
-    private bool isOnGround;
     public bool gameOver = false;
+
+    // Run
+    public bool doubleSpeed = false;
+
+    // double jump
+    private int numberOfJumps = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,31 +37,42 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && isOnGround && !gameOver)
+        if (Input.GetKeyDown(KeyCode.Space) && numberOfJumps < 2 && !gameOver)
         {
             Jump(jumpPower);
             dirtParticle.Stop();
+        }
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            doubleSpeed = true;
+            playerAnim.SetFloat("Speed_Multiplier", 2.0f);
+        }
+        else if (doubleSpeed)
+        {
+            doubleSpeed = false;
+            playerAnim.SetFloat("Speed_Multiplier", 1.0f);
         }
     }
 
     private void Jump(int jumpPower)
     {
+
         playerRb.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
         playerAnim.SetTrigger("Jump_trig");
-        isOnGround = false;
-        playerAudio.PlayOneShot(jumpSound,1.0f);
+        playerAudio.PlayOneShot(jumpSound, 1.0f);
+        numberOfJumps++;
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Ground")
         {
-            isOnGround = true;
-            if(!gameOver)
+            numberOfJumps = 0;
+            if (!gameOver)
             {
                 dirtParticle.Play();
             }
-            
+
         }
         else if (collision.gameObject.tag == "Obstacle")
         {
@@ -65,7 +82,12 @@ public class PlayerController : MonoBehaviour
             playerAnim.SetInteger("DeathType_int", 1);
             explosionParticle.Play();
             dirtParticle.Stop();
-            playerAudio.PlayOneShot(crashSound,1.0f);
+            playerAudio.PlayOneShot(crashSound, 1.0f);
         }
+    }
+
+    private void Run()
+    {
+
     }
 }

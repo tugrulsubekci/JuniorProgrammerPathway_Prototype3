@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class MoveLeft : MonoBehaviour
 {
-    public int speed = 10;
+    [HideInInspector]
+    public int speed = 20;
+
     private PlayerController playerControllerScript;
     // Start is called before the first frame update
     void Start()
@@ -15,10 +17,18 @@ public class MoveLeft : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!playerControllerScript.gameOver)
+        if (!playerControllerScript.gameOver)
         {
-            transform.Translate(Vector3.left * speed * Time.deltaTime);
+            if (playerControllerScript.doubleSpeed)
+            {
+                transform.Translate(Vector3.left * Time.deltaTime * (speed * 2));
+            }
+            else
+            {
+                transform.Translate(Vector3.left * Time.deltaTime * speed);
+            }
         }
-        
+
+
     }
 }
