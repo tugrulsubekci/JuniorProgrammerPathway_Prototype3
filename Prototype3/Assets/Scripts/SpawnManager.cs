@@ -9,15 +9,20 @@ public class SpawnManager : MonoBehaviour
     private Vector3 spawnPosition0 = new Vector3(40, 0, 0);
     private Vector3 spawnPosition1 = new Vector3(157.8f, 9.5f, 4.0f);
 
-    private float startDelay = 2.0f;
-    private float repeatRate = 2.0f;
+    //Obstacle start delay and repeat rate
+    private float startDelayO = 2.0f;
+    private float repeatRateO = 2.0f;
+
+    // Background start delay and repeat rate
+    private float startDelayB = 0.0f;
+    private float repeatRateB = 5.6f;
 
     private PlayerController playerControllerScript;
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("SpawnObstacle", startDelay, repeatRate);
-        InvokeRepeating("SpawnBackground", 0.0f, 5.6f);
+        InvokeRepeating("SpawnObstacle", startDelayO, repeatRateO);
+        InvokeRepeating("SpawnBackground", startDelayB, repeatRateB);
         playerControllerScript = GameObject.Find("Player").GetComponent<PlayerController>();
     }
 
