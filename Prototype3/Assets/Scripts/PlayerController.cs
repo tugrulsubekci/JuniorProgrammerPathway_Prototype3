@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -37,6 +35,11 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        MovePlayer();
+    }
+    // Player Movement
+    private void MovePlayer()
+    {
         if (Input.GetKeyDown(KeyCode.Space) && numberOfJumps < 2 && !gameOver)
         {
             Jump(jumpPower);
@@ -53,7 +56,6 @@ public class PlayerController : MonoBehaviour
             playerAnim.SetFloat("Speed_Multiplier", 1.0f);
         }
     }
-
     private void Jump(int jumpPower)
     {
 
@@ -62,7 +64,6 @@ public class PlayerController : MonoBehaviour
         playerAudio.PlayOneShot(jumpSound, 1.0f);
         numberOfJumps++;
     }
-
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Ground")
@@ -84,10 +85,5 @@ public class PlayerController : MonoBehaviour
             dirtParticle.Stop();
             playerAudio.PlayOneShot(crashSound, 1.0f);
         }
-    }
-
-    private void Run()
-    {
-
     }
 }

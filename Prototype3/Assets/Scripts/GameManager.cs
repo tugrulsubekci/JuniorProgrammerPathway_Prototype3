@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -17,16 +15,21 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!playerControllerScript.gameOver) 
-        { 
+        ScoreCounter();
+    }
+
+    void ScoreCounter()
+    {
+        if (!playerControllerScript.gameOver)
+        {
             if (playerControllerScript.doubleSpeed)
-            { 
-                score += 2; 
-            } 
-            else 
+            {
+                score += 2;
+            }
+            else
             {
                 score++;
-            } 
+            }
             Debug.Log("Score: " + score);
         }
     }

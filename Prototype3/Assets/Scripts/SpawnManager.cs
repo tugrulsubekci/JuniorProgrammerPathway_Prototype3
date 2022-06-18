@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
@@ -25,7 +23,7 @@ public class SpawnManager : MonoBehaviour
     {
 
     }
-
+    // Spawn random obstacles
     void SpawnObstacle()
     {
         int obstacleIndex = Random.Range(0, myPrefabs.Length);

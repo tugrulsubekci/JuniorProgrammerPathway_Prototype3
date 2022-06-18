@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MoveLeft : MonoBehaviour
@@ -17,6 +15,11 @@ public class MoveLeft : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Move();
+    }
+    // Object can move left
+    void Move()
+    {
         if (!playerControllerScript.gameOver)
         {
             if (playerControllerScript.doubleSpeed)
@@ -28,7 +31,5 @@ public class MoveLeft : MonoBehaviour
                 transform.Translate(Vector3.left * Time.deltaTime * speed);
             }
         }
-
-
     }
 }
